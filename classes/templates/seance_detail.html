@@ -1,0 +1,101 @@
+{%extends 'main.html'%}
+{%load static%}
+
+
+{%block content%}
+<style>
+    * {
+      box-sizing: border-box;
+    }
+  
+    /* The Table Attributes */
+    table {
+      text-align: center;
+      width: 700px;
+      margin: 20px auto;
+      font-family: sans-serif;
+      border-bottom: 5px solid #009688;
+    }
+  
+    /* The Attributes that the Head and the Body of the Table Share */
+    th,
+    td {
+      padding: 10px;
+    }
+  
+    /* Attributes of the Head of the Body */
+    th {
+      background-color: #404040;
+      color: white;
+    }
+  
+    /* Attributes of Each Cell */
+    td {
+      background-color: #eee;
+    }
+  
+    /*Attributes of Span*/
+    span {
+      padding: 5px 10px;
+      margin: 3px;
+      color: white;
+    }
+  
+    /*Attributes */
+    .blue {
+      background-color: #03a9f4;
+    }
+  
+    .pink {
+      background-color: #e91e63;
+    }
+  </style>
+<br>
+<div class="container">
+    <h1>{{seance}}</h1>
+    <div class="container">
+        <table>
+            <h1>Group {{seance.group}}</h1> 
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>age</th>
+                    <th>email</th>
+                    <th>phone</th>
+                    <th>Control</th>
+                </tr>
+                <!--  End of The Head -->
+            </thead>
+            <!--   The Body of The Table -->
+            <tbody>
+                <!--          First Row -->
+                {%for student in seance.group.students.all %}
+                <tr>
+                    <td><img src="{{student.photo.url}}"></td>
+                    <td>{{student}}</td>
+                    <td>{{student.age}}</td>
+                    <td><a href="">{{student.email}}</a></td>
+                    <td>+216 {{student.phone}}</td>
+                    
+                    <td>
+                        <a class="btn btn-info" style="background-color : green; color :#eee"
+                        data-pk="{{student.pk}}"  name="g1">
+                            Present
+                        </a>
+                        <a class="btn btn-sm" style="background-color : rgb(85, 3, 3) ; color :#eee" 
+                        data-pk="{{student.pk}}-{{seance.pk}}"  name="g2">
+                            Abscent
+                        </a>
+                </tr>
+                {%endfor%}
+                <!--         Second Row -->
+            </tbody>
+            <!-- End of The Table -->
+        </table>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="{% static 'js/abs.js' %}"></script>
+<script src="{% static 'js/pts.js' %}"></script>
+{%endblock%}

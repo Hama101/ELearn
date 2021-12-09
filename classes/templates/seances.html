@@ -1,0 +1,102 @@
+{%extends 'main.html'%}
+{%load static%}
+
+
+{%block content%}
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  /* The Table Attributes */
+  table {
+    text-align: center;
+    width: 700px;
+    margin: 20px auto;
+    font-family: sans-serif;
+    border-bottom: 5px solid #009688;
+  }
+
+  /* The Attributes that the Head and the Body of the Table Share */
+  th,
+  td {
+    padding: 10px;
+  }
+
+  /* Attributes of the Head of the Body */
+  th {
+    background-color: #404040;
+    color: white;
+  }
+
+  /* Attributes of Each Cell */
+  td {
+    background-color: #eee;
+  }
+
+  /*Attributes of Span*/
+  span {
+    padding: 5px 10px;
+    margin: 3px;
+    color: white;
+  }
+
+  /*Attributes */
+  .blue {
+    background-color: #03a9f4;
+  }
+
+  .pink {
+    background-color: #e91e63;
+  }
+</style>
+<br>
+<div class="container">
+  <table>
+   <h1>Today's Seances</h1>
+    <thead>
+      <tr>
+        <th>Seances</th>
+        <th>Name</th>
+        <th>prof</th>
+        <th>Group</th>
+        <th>Starts</th>
+        <th>Ends</th>
+        <th>Salle</th>
+        <th>Control</th>
+      </tr>
+      <!--  End of The Head -->
+    </thead>
+    <!--   The Body of The Table -->
+    <tbody>
+      <!--          First Row -->
+      {%for seance in seances%}
+      <tr>
+        <td><img src="{{seance.teacher.get_image}}"></td>
+        <td><a href="{%url 'projects'%}?search_query={{seance.subject}}">{{seance.subject}}</a></td>
+        <td><a href="{%url 'user-profile' seance.teacher.profile.id %}">{{seance.teacher}}</a></td>
+        <td><a href="">{{seance.group}}</a></td>
+        <td>{{seance.start_hour}}</td>
+        <td>{{seance.end_hour}}</td>
+        <td>{{seance.salle_number}}</td>
+        <td>
+          <a class="btn btn-info" style="background-color : green; color :#eee" href="{%url 'seance_detail' seance.pk %}">
+            View
+          </a>
+          <a class="btn btn-sm" style="background-color : rgb(85, 3, 3) ; color :#eee" href="">
+            Delete
+          </a>
+        </tr>
+      {%endfor%}
+      <!--         Second Row -->
+    
+    </tbody>
+    <!-- End of The Table -->
+  </table>
+  
+  <a class="btn" href="http://127.0.0.1:8000/admin/classes/seance/add/">Add Seance</a>
+
+</div>
+
+
+{%endblock%}
