@@ -45,6 +45,7 @@ def searchProjects(request):
         Q(title__icontains=search_query) |
         Q(description__icontains=search_query) |
         Q(owner__name__icontains=search_query) |
-        Q(tags__in=tags)
+        Q(tags__in=tags)|
+        Q(subject__name__icontains=search_query)
     )
     return projects, search_query
